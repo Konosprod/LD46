@@ -2821,7 +2821,7 @@ GameObject:
   - component: {fileID: 2053851215}
   - component: {fileID: 2053851214}
   m_Layer: 21
-  m_Name: Cube
+  m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
