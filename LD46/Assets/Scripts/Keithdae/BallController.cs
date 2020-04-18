@@ -48,6 +48,7 @@ public class BallController : MonoBehaviour
             // GameOver
             Debug.Log("Out of camera bounds");
             GameManager._instance.GameOver();
+            gameObject.SetActive(false);    // Disable the ball on game over
         }
 
         if (isActive)
@@ -90,28 +91,6 @@ public class BallController : MonoBehaviour
         }
     }
 
-    /*void OnCollisionEnter2D(Collision2D col)
-    {
-        Debug.Log("OnCollisionEnter2D");
-        Debug.Log("Contact count : " + col.contactCount);
-
-        Vector2 normal = col.GetContact(0).normal;
-
-        Debug.Log("Collision Normal : " + normal.ToString("f6") + "Collision point : " + col.GetContact(0).point.ToString("f6"));
-
-        //float speedMagnitude = Vector3.Magnitude(speed);
-
-        Vector3 perpendicularVector = Vector3.Dot(speed, normal) * normal;
-        Vector3 parallelVector = speed - perpendicularVector;
-
-        speed = parallelVector - perpendicularVector;
-
-        speed *= AccelerationFactor;
-
-        linePreview.SetPosition(1, speed);
-
-        Destroy(col.gameObject);
-    }*/
 
 
     private void ComputeLinePreview()

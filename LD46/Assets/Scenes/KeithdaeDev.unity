@@ -326,7 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e088250c24e57e4bba1bb4d9dccc9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickPrefab: {fileID: 1602664880830185669, guid: 1eabe1088b714fb449a1e28ba7c791b0,
+  brickNormalHorizontalPrefab: {fileID: 1602664880830185669, guid: 1eabe1088b714fb449a1e28ba7c791b0,
+    type: 3}
+  brickNormalVerticalPrefab: {fileID: 6768621399531853252, guid: 0f785d84689879944bd44c0dfaf1e58a,
     type: 3}
   brickHolder: {fileID: 198090164}
   brickPoints: 50
