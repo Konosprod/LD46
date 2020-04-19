@@ -48,7 +48,7 @@ public class BrickManager : MonoBehaviour
 
         Vector2 checkPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D collider = Physics2D.OverlapCircle(checkPosition, 2f, ballMask);
+        Collider2D collider = Physics2D.OverlapCircle(checkPosition, 1f, ballMask);
         if (collider != null)
             res = false;
 
