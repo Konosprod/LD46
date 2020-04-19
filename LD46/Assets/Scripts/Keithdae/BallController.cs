@@ -110,7 +110,7 @@ public class BallController : MonoBehaviour
                         brick.creator.RemoveBrick(brick);
                     }
 
-                    Destroy(raycastHit.collider.gameObject);
+                    brick.DestroyBrick();
                 }
                 else
                 {
