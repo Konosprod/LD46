@@ -26,7 +26,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameObject ball = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
+        GameObject ball2 = Instantiate(ballPrefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
+        GameObject ball3 = Instantiate(ballPrefab, new Vector3(-1f, -1f, 0f), Quaternion.identity);
         balls.Add(ball.GetComponent<BallController>());
+        balls.Add(ball2.GetComponent<BallController>());
+        balls.Add(ball3.GetComponent<BallController>());
     }
 
     // Update is called once per frame
@@ -44,12 +48,18 @@ public class GameManager : MonoBehaviour
     {
         float res = 0f;
 
+        int activeBallCount = 0;
+
         foreach (BallController ball in balls)
         {
-            res += ball.speed.magnitude;
+            if (ball.gameObject.activeSelf)
+            {
+                res += ball.speed.magnitude;
+                activeBallCount++;
+            }
         }
 
-        return res / balls.Count;
+        return res / (activeBallCount == 0 ? 1 : activeBallCount);
     }
 
     public void StartGame()

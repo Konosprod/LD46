@@ -67,28 +67,6 @@ public class BallController : MonoBehaviour
             Vector2 dir = new Vector2(speed.x, speed.y).normalized;
             float remainingMagnitude = speed.magnitude * Time.fixedDeltaTime;
 
-            /*RaycastHit2D raycastHit;
-            raycastHit = Physics2D.CircleCast(pos, 0.5f, dir, remainingMagnitude * Time.fixedDeltaTime, brickMask);
-            if (raycastHit.collider != null)
-            {
-                //Debug.Log("Pos : " + pos.ToString("f6") + ", Dir : " + dir.ToString("f6") + ", Remaining magnitude : " + remainingMagnitude);
-
-                //Debug.Log("Collider hit : " + raycastHit.collider);
-                Vector2 normal = raycastHit.normal;
-
-                //Debug.Log("Collision Normal : " + normal.ToString("f6") + ", point : " + raycastHit.point.ToString("f6"));
-
-                Vector3 perpendicularVector = Vector3.Dot(speed, normal) * normal;
-                Vector3 parallelVector = speed - perpendicularVector;
-
-                speed = parallelVector - perpendicularVector;
-
-                speed *= AccelerationFactor;
-
-                Destroy(raycastHit.collider.gameObject);
-            }*/
-
-
             RaycastHit2D[] raycastHits = new RaycastHit2D[20];
             bool over = false;
             bool hasBrokenBrick = false;
