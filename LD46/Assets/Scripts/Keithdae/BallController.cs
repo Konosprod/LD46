@@ -68,6 +68,8 @@ public class BallController : MonoBehaviour
             RaycastHit2D[] raycastHits = new RaycastHit2D[20];
             bool over = false;
             bool hasBrokenBrick = false;
+            bool hasHitIceBrick = false;
+            float iceBrickSlowFactor = 1f;
 
             List<Collider2D> collidersHit = new List<Collider2D>();
 
@@ -110,6 +112,17 @@ public class BallController : MonoBehaviour
                         brick.creator.RemoveBrick(brick);
                     }
 
+                    switch(brick.type)
+                    {
+                        case Brick.BrickType.Ice:
+                            hasHitIceBrick = true;
+                            iceBrickSlowFactor = brick.iceBrickSlowFactor;
+                            break;
+                        default:
+                            break;
+                    }
+
+
                     brick.DestroyBrick();
                 }
                 else
@@ -119,6 +132,9 @@ public class BallController : MonoBehaviour
                     speed = dir * initialMagnitude;
                 }
             }
+
+            if (hasHitIceBrick)
+                speed *= iceBrickSlowFactor;
 
 
             if(hasBrokenBrick)

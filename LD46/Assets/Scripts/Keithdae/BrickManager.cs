@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class BrickManager : MonoBehaviour
 {
+    [Header("Brick prefabs")]
     public GameObject brickNormalHorizontalPrefab;
     public GameObject brickNormalVerticalPrefab;
+
+    public GameObject brickIceHorizontalPrefab;
+    public GameObject brickIceVerticalPrefab;
+
+    public GameObject brickWideHorizontalPrefab;
+    public GameObject brickWideVerticalPrefab;
 
     public Transform brickHolder;
 
@@ -13,10 +20,18 @@ public class BrickManager : MonoBehaviour
 
     private LayerMask ballMask;
 
+    [HideInInspector]
+    public Brick.BrickType selectedBrickType = Brick.BrickType.Normal;
+    private GameObject selectedBrickTypeHorizontalPrefab;
+    private GameObject selectedBrickTypeVerticalPrefab;
+
+
     // Start is called before the first frame update
     void Start()
     {
         ballMask = LayerMask.GetMask("Ball");
+        selectedBrickTypeHorizontalPrefab = brickNormalHorizontalPrefab;
+        selectedBrickTypeVerticalPrefab = brickNormalVerticalPrefab;
     }
 
     // Update is called once per frame
@@ -27,7 +42,7 @@ public class BrickManager : MonoBehaviour
         {
             Vector3 brickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             brickPosition.z = 0;
-            Instantiate(brickNormalHorizontalPrefab, brickPosition, brickNormalHorizontalPrefab.transform.rotation, brickHolder);
+            Instantiate(selectedBrickTypeHorizontalPrefab, brickPosition, brickNormalHorizontalPrefab.transform.rotation, brickHolder);
         }
 
         // Right-click => vertical brick
@@ -35,9 +50,33 @@ public class BrickManager : MonoBehaviour
         {
             Vector3 brickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             brickPosition.z = 0;
-            Instantiate(brickNormalVerticalPrefab, brickPosition, brickNormalVerticalPrefab.transform.rotation, brickHolder);
+            Instantiate(selectedBrickTypeVerticalPrefab, brickPosition, brickNormalVerticalPrefab.transform.rotation, brickHolder);
         }
 
+
+        // 1 is normal brick type
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            selectedBrickType = Brick.BrickType.Normal;
+            selectedBrickTypeHorizontalPrefab = brickNormalHorizontalPrefab;
+            selectedBrickTypeVerticalPrefab = brickNormalVerticalPrefab;
+        }
+
+        // 2 is ice brick type
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            selectedBrickType = Brick.BrickType.Ice;
+            selectedBrickTypeHorizontalPrefab = brickIceHorizontalPrefab;
+            selectedBrickTypeVerticalPrefab = brickIceVerticalPrefab;
+        }
+
+        // 3 is wide brick type
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            selectedBrickType = Brick.BrickType.Wide;
+            selectedBrickTypeHorizontalPrefab = brickWideHorizontalPrefab;
+            selectedBrickTypeVerticalPrefab = brickWideVerticalPrefab;
+        }
     }
 
 

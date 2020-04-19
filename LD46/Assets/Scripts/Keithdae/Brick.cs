@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
+    public enum BrickType
+    {
+        Normal = 0,
+        Ice = 1,
+        Wide = 2
+    }
+
+    [Header("Brick type parameters")]
+    public BrickType type;
+    public float iceBrickSlowFactor = 0.5f;
+
     public BrickGenerator creator = null;
 
     public ParticleSystem particles;
