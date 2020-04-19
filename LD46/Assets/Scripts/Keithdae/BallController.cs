@@ -8,7 +8,8 @@ public class BallController : MonoBehaviour
     public float initialSpeedMagnitude = 3.5f;
     public float previewLengthCap = 12f;
 
-    private Vector3 speed;
+    [HideInInspector]
+    public Vector3 speed;
 
     public LineRenderer linePreview;
     private LayerMask brickMask;
