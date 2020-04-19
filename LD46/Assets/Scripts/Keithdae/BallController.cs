@@ -65,9 +65,9 @@ public class BallController : MonoBehaviour
         {
             Vector2 pos = new Vector2(transform.position.x, transform.position.y);
             Vector2 dir = new Vector2(speed.x, speed.y).normalized;
-            float remainingMagnitude = speed.magnitude;
+            float remainingMagnitude = speed.magnitude * Time.fixedDeltaTime;
 
-            RaycastHit2D raycastHit;
+            /*RaycastHit2D raycastHit;
             raycastHit = Physics2D.CircleCast(pos, 0.5f, dir, remainingMagnitude * Time.fixedDeltaTime, brickMask);
             if (raycastHit.collider != null)
             {
@@ -86,7 +86,53 @@ public class BallController : MonoBehaviour
                 speed *= AccelerationFactor;
 
                 Destroy(raycastHit.collider.gameObject);
+            }*/
+
+
+            RaycastHit2D[] raycastHits = new RaycastHit2D[20];
+            bool over = false;
+            bool hasBrokenBrick = false;
+
+            List<Collider2D> collidersHit = new List<Collider2D>();
+
+            while (!over)
+            {
+                raycastHits = Physics2D.CircleCastAll(pos, 0.5f, dir, remainingMagnitude, brickMask);
+
+                RaycastHit2D raycastHit = new RaycastHit2D();
+                foreach (RaycastHit2D hit in raycastHits)
+                {
+                    if (!collidersHit.Contains(hit.collider))
+                    {
+                        raycastHit = hit;
+                        break;
+                    }
+                }
+
+                //Debug.Log("Pos : " + pos.ToString("f6") + ", Dir : " + dir.ToString("f6") + ", Remaining magnitude : " + remainingMagnitude);
+
+                if (raycastHit.collider != null && !collidersHit.Contains(raycastHit.collider))
+                {
+                    Vector2 normal = raycastHit.normal;
+
+                    //Debug.Log("Collision Normal : " + normal.ToString("f6") + ", point : " + raycastHit.point.ToString("f6"));
+
+                    Vector3 perpendicularVector = Vector3.Dot(speed, normal) * normal;
+                    Vector3 parallelVector = speed - perpendicularVector;
+
+                    speed = parallelVector - perpendicularVector;
+
+                    hasBrokenBrick = true;
+                    Destroy(raycastHit.collider.gameObject);
+                }
+                else
+                    over = true;
             }
+
+
+            if(hasBrokenBrick)
+                speed *= AccelerationFactor;
+
 
             transform.position += speed * Time.fixedDeltaTime;
         }
@@ -101,7 +147,7 @@ public class BallController : MonoBehaviour
         Vector2 dir = new Vector2(speed.x, speed.y).normalized;
         float remainingMagnitude = speed.magnitude > previewLengthCap ? previewLengthCap : speed.magnitude;
 
-        RaycastHit2D raycastHit;
+        RaycastHit2D[] raycastHits = new RaycastHit2D[20];
         int linePositionIndex = 1;
         bool over = false;
 
@@ -109,7 +155,17 @@ public class BallController : MonoBehaviour
 
         while (!over)
         {
-            raycastHit = Physics2D.CircleCast(pos, 0.5f, dir, remainingMagnitude, brickMask);
+            raycastHits = Physics2D.CircleCastAll(pos, 0.5f, dir, remainingMagnitude, brickMask);
+
+            RaycastHit2D raycastHit = new RaycastHit2D();
+            foreach (RaycastHit2D hit in raycastHits)
+            {
+                if (!collidersHit.Contains(hit.collider))
+                {
+                    raycastHit = hit;
+                    break;
+                }
+            }
 
             //Debug.Log("Pos : " + pos.ToString("f6") + ", Dir : " + dir.ToString("f6") + ", Remaining magnitude : " + remainingMagnitude);
 
@@ -142,6 +198,7 @@ public class BallController : MonoBehaviour
             else
                 over = true;
         }
+
         linePreview.SetPosition(linePositionIndex, new Vector3(pos.x, pos.y, 0f) + new Vector3(dir.x, dir.y, 0f) * remainingMagnitude - transform.position);
 
     }
