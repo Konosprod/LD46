@@ -5,6 +5,23 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public struct LevelInfo
+    {
+        public int nbBalls;
+        public float initialSpeed;
+        public float length;
+
+        public LevelInfo(int nb, float spe, float len)
+        {
+            nbBalls = nb;
+            initialSpeed = spe;
+            length = len;
+        }
+    }
+
+    private LevelInfo[] levels = new LevelInfo[5] { new LevelInfo(1, 3.5f, 20f), new LevelInfo(1, 5f, 30f), new LevelInfo(2, 3f, 25f), new LevelInfo(1, 10f, 15f), new LevelInfo(2, 4f, 45f) };
+
+
     public static GameManager _instance;
 
     public List<BallController> balls;
@@ -12,7 +29,14 @@ public class GameManager : MonoBehaviour
 
     public bool isGameActive = false;
 
+
+    private int level = 1;
+    private float timer = 1337f;
+
+    [Header("UI")]
+    public Text levelText;
     public Text speedText;
+    public Text timerText;
 
     private void Awake()
     {
@@ -25,12 +49,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject ball = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
-        GameObject ball2 = Instantiate(ballPrefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
-        GameObject ball3 = Instantiate(ballPrefab, new Vector3(-1f, -1f, 0f), Quaternion.identity);
-        balls.Add(ball.GetComponent<BallController>());
-        balls.Add(ball2.GetComponent<BallController>());
-        balls.Add(ball3.GetComponent<BallController>());
+        SetupLevel();
     }
 
     // Update is called once per frame
@@ -38,10 +57,20 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartGame();
+            StartLevel();
         }
 
-        speedText.text = "Speed : " + GetAverageSpeed().ToString("F2");
+        if (isGameActive)
+        {
+            timer -= Time.deltaTime;
+            speedText.text = "Speed : " + GetAverageSpeed().ToString("F2");
+            timerText.text = "Time : " + (timer > 0f ? timer.ToString("F2") : "0");
+
+            if (timer <= 0f)
+            {
+                EndLevel();
+            }
+        }
     }
 
     private float GetAverageSpeed()
@@ -62,17 +91,86 @@ public class GameManager : MonoBehaviour
         return res / (activeBallCount == 0 ? 1 : activeBallCount);
     }
 
-    public void StartGame()
+    private void SetupLevel()
+    {
+        if (level > levels.Length)
+        {
+            WinGame();
+        }
+        else
+        {
+            LevelInfo lvl = levels[level - 1];
+            int activeBallCount = 0;
+
+            // Create som extra balls if needed
+            if (lvl.nbBalls > balls.Count)
+            {
+                for (int i = balls.Count; i < lvl.nbBalls; i++)
+                {
+                    GameObject ball = Instantiate(ballPrefab, RandomCoordinatesForBall(), Quaternion.identity);
+                    balls.Add(ball.GetComponent<BallController>());
+                }
+            }
+
+
+            // Set active the right amount of balls and set them up
+            foreach (BallController ball in balls)
+            {
+                if (activeBallCount < lvl.nbBalls)
+                {
+                    ball.gameObject.SetActive(true);
+                    ball.SetActive(false);
+                    ball.transform.position = RandomCoordinatesForBall();
+                    ball.SetInitialSpeed(lvl.initialSpeed);
+                    activeBallCount++;
+                }
+                else
+                {
+                    ball.gameObject.SetActive(false);
+                }
+            }
+
+
+            timer = lvl.length;
+
+            speedText.text = "Speed : " + GetAverageSpeed().ToString("F2");
+            timerText.text = "Time : " + (timer > 0f ? timer.ToString("F2") : "0");
+            levelText.text = "Level " + level.ToString();
+        }
+    }
+
+    private Vector3 RandomCoordinatesForBall()
+    {
+        return new Vector3(Random.Range(-1f, 1f), Random.Range(-1.5f, 1.5f), 0f);
+    }
+
+
+
+    private void StartLevel()
     {
         foreach (BallController ball in balls)
         {
             ball.SetActive(true);
         }
+        isGameActive = true;
+    }
+
+    private void EndLevel()
+    {
+        isGameActive = false;
+        level++;
+        SetupLevel();
     }
 
     public void GameOver()
     {
         Debug.Log("Game is over noob");
+
+    }
+
+    private void WinGame()
+    {
+        Debug.Log("You won the game, gg");
 
     }
 }

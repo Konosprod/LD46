@@ -30,16 +30,19 @@ public class BrickGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime -= Time.deltaTime;
-
-        if (currentTime <= 0f && bricks.Count < maxBricks)
+        if (GameManager._instance.isGameActive)
         {
-            Vector3 pos = transform.position + new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 0f);
-            GameObject newBrick = Instantiate(brickPrefab, pos, brickPrefab.transform.rotation, transform);
-            Brick newBrickBrick = newBrick.GetComponent<Brick>();
-            newBrickBrick.creator = this;
-            bricks.Add(newBrickBrick);
-            currentTime = brickGenerationTime;
+            currentTime -= Time.deltaTime;
+
+            if (currentTime <= 0f && bricks.Count < maxBricks)
+            {
+                Vector3 pos = transform.position + new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 0f);
+                GameObject newBrick = Instantiate(brickPrefab, pos, brickPrefab.transform.rotation, transform);
+                Brick newBrickBrick = newBrick.GetComponent<Brick>();
+                newBrickBrick.creator = this;
+                bricks.Add(newBrickBrick);
+                currentTime = brickGenerationTime;
+            }
         }
     }
 

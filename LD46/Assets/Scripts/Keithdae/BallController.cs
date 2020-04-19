@@ -5,7 +5,6 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     public float AccelerationFactor = 1.05f;
-    public float initialSpeedMagnitude = 3.5f;
     public float previewLengthCap = 12f;
 
     [HideInInspector]
@@ -21,12 +20,6 @@ public class BallController : MonoBehaviour
 
     private void Awake()
     {
-        float x = Random.Range(-1f, 1f);
-        float y = Random.Range(-1f, 1f);
-        speed = new Vector3(x, y, 0f).normalized * initialSpeedMagnitude;
-        linePreview.SetPosition(1, speed);
-        linePreview.enabled = true;
-
         brickMask = LayerMask.GetMask("Brick");
     }
 
@@ -42,7 +35,7 @@ public class BallController : MonoBehaviour
     private void Update()
     {
         Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
-        bool onScreen = screenPos.x > -0.05f && screenPos.x < 1.05f && screenPos.y > -0.05f && screenPos.y < 1.05f;
+        bool onScreen = screenPos.x > -0.05f && screenPos.x < 1.05f && screenPos.y > -0.05f && screenPos.y < 0.8f;
 
         if (!onScreen)
         {
@@ -216,5 +209,17 @@ public class BallController : MonoBehaviour
         isActive = active;
         /*isPreviewActive = !active;
         linePreview.enabled = !active;*/
+    }
+
+
+    public void SetInitialSpeed(float initSpeed)
+    {
+
+        float x = Random.Range(-1f, 1f);
+        float y = Random.Range(-1f, 1f);
+        speed = new Vector3(x, y, 0f).normalized * initSpeed;
+        linePreview.positionCount = 2;
+        linePreview.SetPosition(1, speed);
+        linePreview.enabled = true;
     }
 }
