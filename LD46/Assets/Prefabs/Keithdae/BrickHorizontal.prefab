@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1602664880830185689}
   - component: {fileID: 1602664880830185670}
   - component: {fileID: -6246629380465526564}
+  - component: {fileID: 4988191541661247243}
   m_Layer: 21
   m_Name: BrickHorizontal
   m_TagString: Untagged
@@ -56,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.23, y: 1}
+  m_Size: {x: 2.2, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &-6246629380465526564
 SpriteRenderer:
@@ -108,3 +109,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4988191541661247243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602664880830185669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29248bf1261342a459458bfc06901520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creator: {fileID: 0}

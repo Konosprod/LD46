@@ -51,11 +51,6 @@ public class BallController : MonoBehaviour
             GameManager._instance.GameOver();
             gameObject.SetActive(false);    // Disable the ball on game over
         }
-
-        if (isActive)
-        {
-            ComputeLinePreview();
-        }
     }
 
 
@@ -63,9 +58,12 @@ public class BallController : MonoBehaviour
     {
         if (isActive)
         {
+            ComputeLinePreview();
+
             Vector2 pos = new Vector2(transform.position.x, transform.position.y);
             Vector2 dir = new Vector2(speed.x, speed.y).normalized;
             float remainingMagnitude = speed.magnitude * Time.fixedDeltaTime;
+            float initialMagnitude = speed.magnitude;
 
             RaycastHit2D[] raycastHits = new RaycastHit2D[20];
             bool over = false;
@@ -89,22 +87,37 @@ public class BallController : MonoBehaviour
 
                 //Debug.Log("Pos : " + pos.ToString("f6") + ", Dir : " + dir.ToString("f6") + ", Remaining magnitude : " + remainingMagnitude);
 
-                if (raycastHit.collider != null && !collidersHit.Contains(raycastHit.collider))
+                if (raycastHit.collider != null && !collidersHit.Contains(raycastHit.collider) && remainingMagnitude > 0f)
                 {
                     Vector2 normal = raycastHit.normal;
 
                     //Debug.Log("Collision Normal : " + normal.ToString("f6") + ", point : " + raycastHit.point.ToString("f6"));
 
-                    Vector3 perpendicularVector = Vector3.Dot(speed, normal) * normal;
-                    Vector3 parallelVector = speed - perpendicularVector;
+                    Vector2 perpendicularVector = Vector2.Dot(dir, normal) * normal;
+                    Vector2 parallelVector = dir - perpendicularVector;
 
-                    speed = parallelVector - perpendicularVector;
+                    dir = parallelVector - perpendicularVector;
+
+                    float dist = Vector2.Distance(pos, raycastHit.point + normal * 0.5f);
+                    remainingMagnitude -= dist;
+                    pos = raycastHit.point + normal * 0.5f;
 
                     hasBrokenBrick = true;
+
+                    Brick brick = raycastHit.collider.gameObject.GetComponent<Brick>();
+                    if (brick.creator != null)
+                    {
+                        brick.creator.RemoveBrick(brick);
+                    }
+
                     Destroy(raycastHit.collider.gameObject);
                 }
                 else
+                {
                     over = true;
+                    transform.position = pos;
+                    speed = dir * initialMagnitude;
+                }
             }
 
 
@@ -147,7 +160,7 @@ public class BallController : MonoBehaviour
 
             //Debug.Log("Pos : " + pos.ToString("f6") + ", Dir : " + dir.ToString("f6") + ", Remaining magnitude : " + remainingMagnitude);
 
-            if (raycastHit.collider != null && !collidersHit.Contains(raycastHit.collider))
+            if (raycastHit.collider != null && !collidersHit.Contains(raycastHit.collider) && remainingMagnitude > 0f)
             {
                 //Debug.Log("Collider hit : " + raycastHit.collider);
                 Vector2 normal = raycastHit.normal;
