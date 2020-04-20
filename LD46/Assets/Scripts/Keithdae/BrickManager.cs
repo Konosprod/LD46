@@ -34,7 +34,7 @@ public class BrickManager : MonoBehaviour
 
     [HideInInspector]
     public long initialBrickPoints = 10;
-    private long brickPoints = 0;
+    public long brickPoints = 0;
     [HideInInspector]
     public int brickGen = 1;       // Bricks earned per second
 

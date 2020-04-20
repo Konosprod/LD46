@@ -5,6 +5,7 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     public AudioClip breakingSound;
+    public AudioClip hitSound;
 
     public enum BrickType
     {
@@ -30,5 +31,13 @@ public class Brick : MonoBehaviour
         this.GetComponent<SpriteRenderer>().enabled = false;
         this.GetComponent<Collider2D>().enabled = false;
         Object.Destroy(this.gameObject, .5f);
+    }
+
+    public void Hit()
+    {
+        hp--;
+
+        if(hp > 0)
+            AudioManager.instance.PlaySfx(hitSound);
     }
 }
