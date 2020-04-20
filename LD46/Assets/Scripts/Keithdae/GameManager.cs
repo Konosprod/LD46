@@ -62,7 +62,15 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetupLevel();
+        if (!SettingsManager.instance.settings.panel1Seen)
+        {
+            panelLevel1.SetActive(true);
+            SettingsManager.instance.settings.panel1Seen = true;
+        }
+        else
+        {
+            SetupLevel();
+        }
         UiManager._instance.SelectNormalBrick();
     }
 
@@ -170,7 +178,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Co_NextLevel()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.1f);
         SetupLevel();
     }
 
@@ -206,12 +214,15 @@ public class GameManager : MonoBehaviour
             panelLevel3.SetActive(true);
             SettingsManager.instance.settings.panel2Seen = true;
         }
-        else if (level == 6 && !SettingsManager.instance.settings.panel1Seen)
+        else if (level == 6 && !SettingsManager.instance.settings.panel3Seen)
         {
             panelLevel6.SetActive(true);
             SettingsManager.instance.settings.panel3Seen = true;
         }
-        else { SetupLevel(); }
+        else 
+        { 
+            SetupLevel(); 
+        }
 
     }
 
