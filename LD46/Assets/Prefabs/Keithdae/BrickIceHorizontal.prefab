@@ -124,7 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breakingSound: {fileID: 8300000, guid: 2190167dcd978ab4eb0dae72460c5e93, type: 3}
   type: 1
-  iceBrickSlowFactor: 0.5
+  iceBrickSlowFactor: 0.7
+  hp: 1
   creator: {fileID: 0}
   particles: {fileID: 5946792030622487894}
 --- !u!1 &4625806842014719198
