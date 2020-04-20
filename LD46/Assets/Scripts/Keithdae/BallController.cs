@@ -40,7 +40,6 @@ public class BallController : MonoBehaviour
         if (!onScreen)
         {
             // GameOver
-            Debug.Log("Out of camera bounds");
             GameManager._instance.GameOver();
             gameObject.SetActive(false);    // Disable the ball on game over
         }

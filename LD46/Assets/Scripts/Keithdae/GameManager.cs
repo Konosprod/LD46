@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
     {
         if (!SettingsManager.instance.settings.panel1Seen)
         {
-            Debug.Log("Here");
             panelLevel1.SetActive(true);
             notBrickAllowed = true;
             SettingsManager.instance.settings.panel1Seen = true;
