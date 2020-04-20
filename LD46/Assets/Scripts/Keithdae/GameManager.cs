@@ -19,10 +19,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private LevelInfo[] levels = new LevelInfo[20] { new LevelInfo(1, 3.5f, 20f), new LevelInfo(1, 5f, 30f), new LevelInfo(2, 3f, 25f), new LevelInfo(1, 10f, 15f), new LevelInfo(2, 4f, 45f),  //1-5
-                                                     new LevelInfo(1, 12f, 30f), new LevelInfo(3, 3f, 30f), new LevelInfo(2, 7f, 15f), new LevelInfo(3, 4.5f, 20f), new LevelInfo(4, 3f, 45f),  //6-10
-                                                     new LevelInfo(1, 25f, 25f), new LevelInfo(6, 2f, 30f), new LevelInfo(4, 4f, 25f), new LevelInfo(2, 15f, 20f), new LevelInfo(5, 4f, 45f),  //11-15
-                                                     new LevelInfo(3, 20f, 10f), new LevelInfo(4, 5f, 30f), new LevelInfo(10, 2f, 20f), new LevelInfo(5, 7f, 15f), new LevelInfo(7, 3f, 45f)   //16-20
+    private LevelInfo[] levels = new LevelInfo[20] { new LevelInfo(1, 3.5f, 20f), new LevelInfo(1, 5f, 30f), new LevelInfo(2, 3f, 25f), new LevelInfo(1, 10f, 15f), new LevelInfo(2, 4f, 45f),      //1-5
+                                                     new LevelInfo(1, 12f, 30f), new LevelInfo(3, 3f, 30f), new LevelInfo(2, 7f, 15f), new LevelInfo(3, 4.5f, 20f), new LevelInfo(4, 3f, 45f),      //6-10
+                                                     new LevelInfo(1, 25f, 25f), new LevelInfo(6, 2f, 30f), new LevelInfo(4, 4f, 25f), new LevelInfo(2, 13.5f, 20f), new LevelInfo(5, 3.2f, 45f),   //11-15
+                                                     new LevelInfo(3, 20f, 10f), new LevelInfo(4, 5f, 30f), new LevelInfo(10, 2f, 20f), new LevelInfo(5, 7f, 15f), new LevelInfo(7, 3f, 45f)        //16-20
     };
 
 
