@@ -78,7 +78,9 @@ public class SettingsManager : MonoBehaviour
             toggleFullscreen.isOn = settings.fullScreen;
             dropdownResolutions.value = settings.resolution;
             sliderVolumeMusic.value = settings.musicVolume;
+            OnMusicVolumeChanged(sliderVolumeMusic.value);
             sliderVolumeSFX.value = settings.sfxVolume;
+            OnSfxVolumeChanged(settings.sfxVolume);
         }
         catch(System.Exception e)
         {
