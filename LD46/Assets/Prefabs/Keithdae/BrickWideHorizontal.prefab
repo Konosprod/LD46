@@ -126,7 +126,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: f3ba97f1b55ffda478df6039bfb61980, type: 3}
   type: 2
   iceBrickSlowFactor: 0.5
-  hp: 2
+  hp: 3
   creator: {fileID: 0}
   particles: {fileID: 5946792030622487894}
 --- !u!1 &4625806842014719198
