@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        EndLevel();
+        isGameActive = false;
         UiManager._instance.ShowEndGame(false);
 
         foreach (BallController ball in balls)
@@ -176,7 +176,7 @@ public class GameManager : MonoBehaviour
 
     private void WinGame()
     {
-        EndLevel();
+        isGameActive = false;
         UiManager._instance.ShowEndGame(true);
 
         foreach (BallController ball in balls)
