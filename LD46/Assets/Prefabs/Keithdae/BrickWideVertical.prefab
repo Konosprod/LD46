@@ -4936,5 +4936,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   iceBrickSlowFactor: 0.5
+  hp: 2
   creator: {fileID: 0}
   particles: {fileID: 6375178115607766341}

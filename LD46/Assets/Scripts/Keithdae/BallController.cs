@@ -115,8 +115,9 @@ public class BallController : MonoBehaviour
                             break;
                     }
 
-
-                    brick.DestroyBrick();
+                    brick.hp--;
+                    if(brick.hp <= 0)
+                        brick.DestroyBrick();
                 }
                 else
                 {

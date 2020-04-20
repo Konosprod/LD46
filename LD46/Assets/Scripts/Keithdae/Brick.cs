@@ -14,6 +14,7 @@ public class Brick : MonoBehaviour
     [Header("Brick type parameters")]
     public BrickType type;
     public float iceBrickSlowFactor = 0.5f;
+    public int hp = 1;
 
     public BrickGenerator creator = null;
 
