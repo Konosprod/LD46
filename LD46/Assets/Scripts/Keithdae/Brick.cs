@@ -7,6 +7,9 @@ public class Brick : MonoBehaviour
     public AudioClip breakingSound;
     public AudioClip hitSound;
 
+    public GameObject hit1;
+    public GameObject hit2;
+
     public enum BrickType
     {
         Normal = 0,
@@ -39,5 +42,11 @@ public class Brick : MonoBehaviour
 
         if(hp > 0)
             AudioManager.instance.PlaySfx(hitSound);
+
+        if (hp == 2)
+            hit1.SetActive(true);
+
+        if (hp == 1)
+            hit2.SetActive(true);
     }
 }
