@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SetupLevel();
+        UiManager._instance.SelectNormalBrick();
     }
 
     // Update is called once per frame
