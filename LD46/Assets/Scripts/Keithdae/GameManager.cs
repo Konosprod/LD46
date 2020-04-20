@@ -64,13 +64,13 @@ public class GameManager : MonoBehaviour
     {
         if (!SettingsManager.instance.settings.panel1Seen)
         {
+            Debug.Log("Here");
             panelLevel1.SetActive(true);
+            notBrickAllowed = true;
             SettingsManager.instance.settings.panel1Seen = true;
         }
-        else
-        {
-            SetupLevel();
-        }
+
+        SetupLevel();
         UiManager._instance.SelectNormalBrick();
     }
 
@@ -115,8 +115,6 @@ public class GameManager : MonoBehaviour
 
     private void SetupLevel()
     {
-        notBrickAllowed = false;
-
         if (level > levels.Length)
         {
             WinGame();
@@ -179,7 +177,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Co_NextLevel()
     {
         yield return new WaitForSeconds(0.1f);
-        SetupLevel();
+        notBrickAllowed = false;
     }
 
 
@@ -194,7 +192,6 @@ public class GameManager : MonoBehaviour
 
     private void NextLevel()
     {
-        notBrickAllowed = true;
         // Upgrades every 5 levels YEAH
         if (level % 5 == 0)
         {
@@ -212,23 +209,21 @@ public class GameManager : MonoBehaviour
         if (level == 3 && !SettingsManager.instance.settings.panel2Seen)
         {
             panelLevel3.SetActive(true);
+            notBrickAllowed = true;
             SettingsManager.instance.settings.panel2Seen = true;
         }
         else if (level == 6 && !SettingsManager.instance.settings.panel3Seen)
         {
             panelLevel6.SetActive(true);
+            notBrickAllowed = true;
             SettingsManager.instance.settings.panel3Seen = true;
         }
-        else 
-        { 
-            SetupLevel(); 
-        }
 
+        SetupLevel();
     }
 
     public void GameOver()
     {
-        notBrickAllowed = true;
         isGameActive = false;
         BrickManager._instance.brickPoints = 0;
         UiManager._instance.ShowEndGame(false, level, score);
@@ -242,7 +237,6 @@ public class GameManager : MonoBehaviour
 
     private void WinGame()
     {
-        notBrickAllowed = true;
         isGameActive = false;
         BrickManager._instance.brickPoints = 0;
         UiManager._instance.ShowEndGame(true, level, score);
