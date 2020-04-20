@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     private float timer = 1337f;
 
+    public GameObject newLevelText;
+
     [Header("Panel Tuto")]
     public GameObject panelLevel1;
     public GameObject panelLevel3;
@@ -174,6 +176,13 @@ public class GameManager : MonoBehaviour
         SetupLevel();
     }
 
+    IEnumerator Co_NewLevel()
+    {
+        newLevelText.SetActive(true);
+        yield return new WaitForSeconds(3);
+        newLevelText.SetActive(false);
+    }
+
 
     private void StartLevel()
     {
@@ -213,6 +222,8 @@ public class GameManager : MonoBehaviour
         }
         else { SetupLevel(); }
 
+
+        StartCoroutine(Co_NewLevel());
     }
 
     public void GameOver()
