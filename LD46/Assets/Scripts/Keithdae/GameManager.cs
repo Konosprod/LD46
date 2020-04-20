@@ -161,13 +161,29 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game is over noob");
+        EndLevel();
+        UiManager._instance.ShowEndGame(false);
 
     }
 
     private void WinGame()
     {
-        Debug.Log("You won the game, gg");
+        EndLevel();
+        UiManager._instance.ShowEndGame(true);
+    }
 
+    public void ResetGame()
+    {
+        level = 1;
+        SetupLevel();
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

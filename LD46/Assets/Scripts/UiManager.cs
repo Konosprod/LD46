@@ -19,10 +19,14 @@ public class UiManager : MonoBehaviour
     public Sprite brickWideImage;
     public Sprite brickWideSelected;
 
+    [Header("Panel")]
+    public GameObject panelEndOfGame;
+
     [Header("Texts")]
     public Text levelText;
     public Text speedText;
     public Text timerText;
+    public Text endofgameText;
 
     void Awake()
     {
@@ -83,5 +87,11 @@ public class UiManager : MonoBehaviour
         brickNormal.sprite = brickNormalSelected;
         brickIce.sprite = brickIceImage;
         brickWide.sprite = brickWideImage;
+    }
+
+    public void ShowEndGame(bool win)
+    {
+        panelEndOfGame.SetActive(true);
+        endofgameText.text = (win == true) ? "YOU DID IT !" : "MISSION FAILED";
     }
 }
