@@ -35,7 +35,7 @@ public class BallController : MonoBehaviour
     private void Update()
     {
         Vector3 screenPos = Camera.main.WorldToViewportPoint(transform.position);
-        bool onScreen = screenPos.x > -0.05f && screenPos.x < 1.05f && screenPos.y > -0.05f && screenPos.y < 0.8f;
+        bool onScreen = screenPos.x > -0.05f && screenPos.x < 1.05f && screenPos.y > -0.05f && screenPos.y < 0.95f;
 
         if (!onScreen)
         {
