@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     private float timer = 1337f;
 
+    [Header("Upgrades")]
+    public int initialBPLevel = 1;  // Upgrades the amount of BP you get at round start
+    public int bpGenLevel = 1;      // Upgrades the BP generation amount
+
 
     private void Awake()
     {
@@ -68,7 +72,7 @@ public class GameManager : MonoBehaviour
 
             if (timer <= 0f)
             {
-                EndLevel();
+                NextLevel();
             }
         }
     }
@@ -158,8 +162,15 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
     }
 
-    private void EndLevel()
+    private void NextLevel()
     {
+        // Upgrades every 5 levels YEAH
+        if (level % 5 == 0)
+        {
+            initialBPLevel++;
+            bpGenLevel++;
+        }
+
         isGameActive = false;
         level++;
         SetupLevel();
@@ -191,6 +202,8 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         level = 1;
+        initialBPLevel = 1;
+        bpGenLevel = 1;
         SetupLevel();
     }
 

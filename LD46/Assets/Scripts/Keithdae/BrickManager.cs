@@ -34,7 +34,7 @@ public class BrickManager : MonoBehaviour
 
     [HideInInspector]
     public long initialBrickPoints = 10;
-    private long brickPoints = 10;
+    private long brickPoints = 0;
     [HideInInspector]
     public int brickGen = 1;       // Bricks earned per second
 
@@ -192,7 +192,7 @@ public class BrickManager : MonoBehaviour
 
 
         /// UI
-        UiManager._instance.UpdateBpText("BP : " + brickPoints.ToString() + " (" + brickGen.ToString() + "/s)");
+        UiManager._instance.UpdateBpText("BP : " + brickPoints.ToString() + " (" + (brickGen * GameManager._instance.bpGenLevel).ToString() + "/s)");
 
 
         /// BP Gen
@@ -201,7 +201,7 @@ public class BrickManager : MonoBehaviour
             bpGenTimer -= Time.deltaTime;
             if (bpGenTimer <= 0f)
             {
-                brickPoints += brickGen;
+                brickPoints += brickGen * GameManager._instance.bpGenLevel;
                 bpGenTimer = 1f;
             }
         }
@@ -255,7 +255,8 @@ public class BrickManager : MonoBehaviour
 
     public void SetupLevel()
     {
-        brickPoints = initialBrickPoints;
+        brickPoints = Mathf.CeilToInt(brickPoints * 0.2f);
+        brickPoints += initialBrickPoints * GameManager._instance.initialBPLevel;
         bpGenTimer = 1f;
     }
 
