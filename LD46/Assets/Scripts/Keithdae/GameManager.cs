@@ -33,10 +33,6 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     private float timer = 1337f;
 
-    [Header("UI")]
-    public Text levelText;
-    public Text speedText;
-    public Text timerText;
 
     private void Awake()
     {
@@ -63,8 +59,8 @@ public class GameManager : MonoBehaviour
         if (isGameActive)
         {
             timer -= Time.deltaTime;
-            speedText.text = "Speed : " + GetAverageSpeed().ToString("F2");
-            timerText.text = "Time : " + (timer > 0f ? timer.ToString("F2") : "0");
+            UiManager._instance.UpdateSpeedText("Speed : " + GetAverageSpeed().ToString("F2"));
+            UiManager._instance.UpdateTimerText("Time : " + (timer > 0f ? timer.ToString("F2") : "0"));
 
             if (timer <= 0f)
             {
@@ -133,9 +129,9 @@ public class GameManager : MonoBehaviour
 
             timer = lvl.length;
 
-            speedText.text = "Speed : " + GetAverageSpeed().ToString("F2");
-            timerText.text = "Time : " + (timer > 0f ? timer.ToString("F2") : "0");
-            levelText.text = "Level " + level.ToString();
+            UiManager._instance.UpdateSpeedText("Speed : " + GetAverageSpeed().ToString("F2"));
+            UiManager._instance.UpdateTimerText("Time : " + (timer > 0f ? timer.ToString("F2") : "0"));
+            UiManager._instance.UpdateLevelText("Level " + level.ToString());
         }
     }
 
