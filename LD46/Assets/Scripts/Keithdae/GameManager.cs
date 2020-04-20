@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     private float timer = 1337f;
 
+    private long score = 0; // Score for a level is : avg_speed * nb_balls * level * time + bp_left * level * 10
+
     [Header("Upgrades")]
     public int initialBPLevel = 1;  // Upgrades the amount of BP you get at round start
     public int bpGenLevel = 1;      // Upgrades the BP generation amount
@@ -171,6 +173,10 @@ public class GameManager : MonoBehaviour
             initialBPLevel++;
             bpGenLevel++;
         }
+
+        // Score for a level is : avg_speed * nb_balls * level * time + bp_left * level * 10
+        LevelInfo lvl = levels[level];
+        score += Mathf.CeilToInt(GetAverageSpeed() * lvl.nbBalls * level * lvl.length + BrickManager._instance.brickPoints * level * 10f);
 
         isGameActive = false;
         level++;
