@@ -139,4 +139,9 @@ public class SettingsManager : MonoBehaviour
 
         return 0;
     }
+
+    private void OnApplicationQuit()
+    {
+        Save();
+    }
 }

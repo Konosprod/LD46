@@ -230,11 +230,9 @@ public class GameManager : MonoBehaviour
         }
         else 
         { 
-            SetupLevel(); 
+            SetupLevel();
+            StartCoroutine(Co_NewLevel());
         }
-
-
-        StartCoroutine(Co_NewLevel());
     }
 
     public void GameOver()
