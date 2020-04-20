@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     public GameObject panelLevel3;
     public GameObject panelLevel6;
 
+    private long score = 0; // Score for a level is : avg_speed * nb_balls * level * time + bp_left * level * 10
+
     [Header("Upgrades")]
     public int initialBPLevel = 1;  // Upgrades the amount of BP you get at round start
     public int bpGenLevel = 1;      // Upgrades the BP generation amount
@@ -177,6 +179,10 @@ public class GameManager : MonoBehaviour
             bpGenLevel++;
         }
 
+        // Score for a level is : avg_speed * nb_balls * level * time + bp_left * level * 10
+        LevelInfo lvl = levels[level];
+        score += Mathf.CeilToInt(GetAverageSpeed() * lvl.nbBalls * level * lvl.length + BrickManager._instance.brickPoints * level * 10f);
+
         isGameActive = false;
         level++;
 
@@ -205,7 +211,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         BrickManager._instance.brickPoints = 0;
-        UiManager._instance.ShowEndGame(false, level);
+        UiManager._instance.ShowEndGame(false, level, score);
 
         foreach (BallController ball in balls)
         {
@@ -218,7 +224,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         BrickManager._instance.brickPoints = 0;
-        UiManager._instance.ShowEndGame(true, level);
+        UiManager._instance.ShowEndGame(true, level, score);
 
         foreach (BallController ball in balls)
         {

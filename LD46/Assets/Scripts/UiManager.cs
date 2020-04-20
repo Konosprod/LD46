@@ -95,9 +95,13 @@ public class UiManager : MonoBehaviour
         brickWide.sprite = brickWideImage;
     }
 
-    public void ShowEndGame(bool win, int level)
+    public void ShowEndGame(bool win, int level, long score)
     {
         panelEndOfGame.SetActive(true);
-        endofgameText.text = (win == true) ? "YOU DID IT !\nLevel " + level.ToString() + " reached" : "MISSION FAILED\nLevel " + level.ToString() + " reached";
+        string text = (win == true) ? "YOU DID IT !" : "MISSION FAILED";
+        text += "\nLevel : " + level.ToString();
+        text += "\nScore : " + score.ToString();
+
+        endofgameText.text = text;
     }
 }
