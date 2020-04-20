@@ -142,7 +142,7 @@ public class BrickManager : MonoBehaviour
 
         /// Inputs
         // Left-click => horizontal brick
-        if (Input.GetMouseButtonDown(0) && costCheck && spaceCheck)
+        if (Input.GetMouseButtonDown(0) && costCheck && spaceCheck && !GameManager._instance.notBrickAllowed)
         {
             if (isHorizontal)
                 Instantiate(selectedBrickTypeHorizontalPrefab, brickPosition, selectedBrickTypeHorizontalPrefab.transform.rotation, brickHolder);

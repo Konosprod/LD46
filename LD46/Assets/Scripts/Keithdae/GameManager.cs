@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
     public int initialBPLevel = 1;  // Upgrades the amount of BP you get at round start
     public int bpGenLevel = 1;      // Upgrades the BP generation amount
 
+    public bool notBrickAllowed = false;
+
 
     private void Awake()
     {
@@ -105,6 +107,8 @@ public class GameManager : MonoBehaviour
 
     private void SetupLevel()
     {
+        notBrickAllowed = false;
+
         if (level > levels.Length)
         {
             WinGame();
@@ -159,6 +163,16 @@ public class GameManager : MonoBehaviour
         return new Vector3(Random.Range(-1f, 1f), Random.Range(-1.5f, 1.5f), 0f);
     }
 
+    public void SetNextLevel()
+    {
+        StartCoroutine(Co_NextLevel());
+    }
+
+    IEnumerator Co_NextLevel()
+    {
+        yield return new WaitForEndOfFrame();
+        SetupLevel();
+    }
 
 
     private void StartLevel()
@@ -172,6 +186,7 @@ public class GameManager : MonoBehaviour
 
     private void NextLevel()
     {
+        notBrickAllowed = true;
         // Upgrades every 5 levels YEAH
         if (level % 5 == 0)
         {
@@ -186,29 +201,23 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         level++;
 
-        if (level == 1 && !SettingsManager.instance.settings.panel1Seen)
-        {
-            panelLevel1.SetActive(true);
-            SettingsManager.instance.settings.panel1Seen = true;
-        }
-
         if (level == 3 && !SettingsManager.instance.settings.panel2Seen)
         {
             panelLevel3.SetActive(true);
             SettingsManager.instance.settings.panel2Seen = true;
         }
-
-        if (level == 6 && !SettingsManager.instance.settings.panel1Seen)
+        else if (level == 6 && !SettingsManager.instance.settings.panel1Seen)
         {
             panelLevel6.SetActive(true);
             SettingsManager.instance.settings.panel3Seen = true;
         }
+        else { SetupLevel(); }
 
-        SetupLevel();
     }
 
     public void GameOver()
     {
+        notBrickAllowed = true;
         isGameActive = false;
         BrickManager._instance.brickPoints = 0;
         UiManager._instance.ShowEndGame(false, level, score);
@@ -222,6 +231,7 @@ public class GameManager : MonoBehaviour
 
     private void WinGame()
     {
+        notBrickAllowed = true;
         isGameActive = false;
         BrickManager._instance.brickPoints = 0;
         UiManager._instance.ShowEndGame(true, level, score);
