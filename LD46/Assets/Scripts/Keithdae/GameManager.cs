@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     private float timer = 1337f;
 
     public GameObject newLevelText;
+    public AudioClip cooldownClip;
 
     [Header("Panel Tuto")]
     public GameObject panelLevel1;
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
     public int bpGenLevel = 1;      // Upgrades the BP generation amount
 
     public bool notBrickAllowed = false;
+
+    public bool doneCooldown = false;
 
 
     private void Awake()
@@ -88,6 +91,12 @@ public class GameManager : MonoBehaviour
             timer -= Time.deltaTime;
             UiManager._instance.UpdateSpeedText("Speed : " + GetAverageSpeed().ToString("F2"));
             UiManager._instance.UpdateTimerText("Time : " + (timer > 0f ? timer.ToString("F2") : "0"));
+
+            if(timer <= 3f && !doneCooldown)
+            {
+                AudioManager.instance.PlaySfx(cooldownClip);
+                doneCooldown = true;
+            }
 
             if (timer <= 0f)
             {
@@ -160,6 +169,7 @@ public class GameManager : MonoBehaviour
             UiManager._instance.UpdateTimerText("Time : " + (timer > 0f ? timer.ToString("F2") : "0"));
             UiManager._instance.UpdateLevelText("Level " + level.ToString());
 
+            doneCooldown = false;
 
             BrickManager._instance.SetupLevel();
         }

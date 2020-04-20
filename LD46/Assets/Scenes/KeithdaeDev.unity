@@ -2036,12 +2036,14 @@ MonoBehaviour:
     type: 3}
   isGameActive: 0
   newLevelText: {fileID: 566832426}
+  cooldownClip: {fileID: 8300000, guid: 05d910bdc80ae3b47afc4b09cfb76ef8, type: 3}
   panelLevel1: {fileID: 407797455}
   panelLevel3: {fileID: 968142088}
   panelLevel6: {fileID: 1295701628}
   initialBPLevel: 1
   bpGenLevel: 1
   notBrickAllowed: 0
+  doneCooldown: 0
 --- !u!114 &1320679134
 MonoBehaviour:
   m_ObjectHideFlags: 0
