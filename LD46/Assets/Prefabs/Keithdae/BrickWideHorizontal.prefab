@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakingSound: {fileID: 8300000, guid: 2190167dcd978ab4eb0dae72460c5e93, type: 3}
+  hitSound: {fileID: 8300000, guid: f3ba97f1b55ffda478df6039bfb61980, type: 3}
   type: 2
   iceBrickSlowFactor: 0.5
   hp: 2

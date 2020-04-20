@@ -165,6 +165,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameActive = false;
+        BrickManager._instance.brickPoints = 0;
         UiManager._instance.ShowEndGame(false);
 
         foreach (BallController ball in balls)
@@ -177,6 +178,7 @@ public class GameManager : MonoBehaviour
     private void WinGame()
     {
         isGameActive = false;
+        BrickManager._instance.brickPoints = 0;
         UiManager._instance.ShowEndGame(true);
 
         foreach (BallController ball in balls)
