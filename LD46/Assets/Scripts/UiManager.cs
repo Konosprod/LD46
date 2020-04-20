@@ -9,12 +9,15 @@ public class UiManager : MonoBehaviour
 
 
     [Header("Block Selection")]
-    public Image brickNormalImage;
-    public Image brickNormalSelected;
-    public Image brickIceImage;
-    public Image brickIceSelected;
-    public Image brickWideImage;
-    public Image brickWideSelected;
+    public Image brickNormal;
+    public Image brickIce;
+    public Image brickWide;
+    public Sprite brickNormalImage;
+    public Sprite brickNormalSelected;
+    public Sprite brickIceImage;
+    public Sprite brickIceSelected;
+    public Sprite brickWideImage;
+    public Sprite brickWideSelected;
 
     [Header("Texts")]
     public Text levelText;
@@ -59,5 +62,26 @@ public class UiManager : MonoBehaviour
     public void UpdateTimerText(string text)
     {
         timerText.text = text;
+    }
+
+    public void SelectIceBrick()
+    {
+        brickIce.sprite = brickIceSelected;
+        brickNormal.sprite = brickNormalImage;
+        brickWide.sprite = brickWideImage;
+    }
+
+    public void SelectWideBrick()
+    {
+        brickWide.sprite = brickWideSelected;
+        brickIce.sprite = brickIceImage;
+        brickNormal.sprite = brickNormalImage;
+    }
+
+    public void SelectNormalBrick()
+    {
+        brickNormal.sprite = brickNormalSelected;
+        brickIce.sprite = brickIceImage;
+        brickWide.sprite = brickWideImage;
     }
 }

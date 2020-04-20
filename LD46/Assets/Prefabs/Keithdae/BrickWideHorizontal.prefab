@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6246629380465526564}
   - component: {fileID: 4988191541661247243}
   m_Layer: 21
-  m_Name: BrickIceHorizontal
+  m_Name: BrickWideHorizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,16 +49,16 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.375, y: 0.34375, z: 0.40625, w: 0.375}
+    border: {x: 0.375, y: 0.40625, z: 0.40625, w: 0.375}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 2.5, y: 1.25}
+    newSize: {x: 5, y: 1.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2, y: 1}
+  m_Size: {x: 4.8, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &-6246629380465526564
 SpriteRenderer:
@@ -99,12 +99,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c6cca968d3d565a41a4f0a2622c37741, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f08af7d7d21a8bd45a8245052f621521, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2.5, y: 1.25}
+  m_Size: {x: 5, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29248bf1261342a459458bfc06901520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   iceBrickSlowFactor: 0.5
   creator: {fileID: 0}
   particles: {fileID: 5946792030622487894}
@@ -4893,7 +4893,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ab99c9e17301bcf4fb042010df283afd, type: 2}
+  - {fileID: 2100000, guid: d605caf6774b4df4ab8e02f46492d793, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

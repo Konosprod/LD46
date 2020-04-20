@@ -62,6 +62,7 @@ public class BrickManager : MonoBehaviour
             selectedBrickType = Brick.BrickType.Normal;
             selectedBrickTypeHorizontalPrefab = brickNormalHorizontalPrefab;
             selectedBrickTypeVerticalPrefab = brickNormalVerticalPrefab;
+            UiManager._instance.SelectNormalBrick();
         }
 
         // 2 is ice brick type
@@ -70,6 +71,7 @@ public class BrickManager : MonoBehaviour
             selectedBrickType = Brick.BrickType.Ice;
             selectedBrickTypeHorizontalPrefab = brickIceHorizontalPrefab;
             selectedBrickTypeVerticalPrefab = brickIceVerticalPrefab;
+            UiManager._instance.SelectIceBrick();
         }
 
         // 3 is wide brick type
@@ -78,6 +80,7 @@ public class BrickManager : MonoBehaviour
             selectedBrickType = Brick.BrickType.Wide;
             selectedBrickTypeHorizontalPrefab = brickWideHorizontalPrefab;
             selectedBrickTypeVerticalPrefab = brickWideVerticalPrefab;
+            UiManager._instance.SelectWideBrick();
         }
     }
 

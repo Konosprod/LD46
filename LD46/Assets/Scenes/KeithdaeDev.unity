@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 429785929}
   - component: {fileID: 429785928}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: BrickIce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,8 +206,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 42a910ee163c49c44a4b09a41474d15f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c6cca968d3d565a41a4f0a2622c37741, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -336,12 +336,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0d8a7bd43c7994285849ba32b4fdff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickNormalImage: {fileID: 0}
-  brickNormalSelected: {fileID: 0}
-  brickIceImage: {fileID: 0}
-  brickIceSelected: {fileID: 0}
-  brickWideImage: {fileID: 0}
-  brickWideSelected: {fileID: 0}
+  brickNormal: {fileID: 1225161845}
+  brickIce: {fileID: 429785928}
+  brickWide: {fileID: 1972275024}
+  brickNormalImage: {fileID: 21300000, guid: 42a910ee163c49c44a4b09a41474d15f, type: 3}
+  brickNormalSelected: {fileID: 21300000, guid: d3cf721d50cd3c94b8c315f0bd638d00,
+    type: 3}
+  brickIceImage: {fileID: 21300000, guid: c6cca968d3d565a41a4f0a2622c37741, type: 3}
+  brickIceSelected: {fileID: 21300000, guid: e9fd0fef5a1c26c44b2acc4f174787e2, type: 3}
+  brickWideImage: {fileID: 21300000, guid: f08af7d7d21a8bd45a8245052f621521, type: 3}
+  brickWideSelected: {fileID: 21300000, guid: bf1cc8a285cdf8847b169407436e578e, type: 3}
   levelText: {fileID: 1196171173}
   speedText: {fileID: 2042356932}
   timerText: {fileID: 949301369}
@@ -567,7 +571,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e30c523a0dc20b24893dd04eb84a6a0b, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -644,7 +648,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e30c523a0dc20b24893dd04eb84a6a0b, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -677,7 +681,7 @@ GameObject:
   - component: {fileID: 1225161846}
   - component: {fileID: 1225161845}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BrickNormal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,12 +921,14 @@ MonoBehaviour:
     type: 3}
   brickNormalVerticalPrefab: {fileID: 6768621399531853252, guid: 0f785d84689879944bd44c0dfaf1e58a,
     type: 3}
-  brickIceHorizontalPrefab: {fileID: 4542436272294365765, guid: b6a60ef5485ce4e4a8a05adbc8d0ebdd,
+  brickIceHorizontalPrefab: {fileID: 1602664880830185669, guid: 5bfc9ac61dcaf104fa1c05deb84ec779,
     type: 3}
-  brickIceVerticalPrefab: {fileID: 5130665190957701154, guid: 0dfebf4fa3b5a41408f2321e3cf6a694,
+  brickIceVerticalPrefab: {fileID: 6768621399531853252, guid: c99f5b8b16b51064ab26238419619dbb,
     type: 3}
-  brickWideHorizontalPrefab: {fileID: 0}
-  brickWideVerticalPrefab: {fileID: 0}
+  brickWideHorizontalPrefab: {fileID: 1602664880830185669, guid: 92e1dc3351d1fa94ea7e6ba5188a0935,
+    type: 3}
+  brickWideVerticalPrefab: {fileID: 6768621399531853252, guid: 86824a3a995ed8b46956e4b9e6c504ec,
+    type: 3}
   brickHolder: {fileID: 198090164}
   brickPoints: 50
   selectedBrickType: 0
@@ -1216,7 +1222,7 @@ GameObject:
   - component: {fileID: 1972275025}
   - component: {fileID: 1972275024}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: BrickWide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1259,8 +1265,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 42a910ee163c49c44a4b09a41474d15f, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f08af7d7d21a8bd45a8245052f621521, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1333,7 +1339,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e30c523a0dc20b24893dd04eb84a6a0b, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
