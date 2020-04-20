@@ -24,7 +24,7 @@ public class BrickGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentTime = 0.5f; 
+        currentTime = 0.5f;
     }
 
     // Update is called once per frame

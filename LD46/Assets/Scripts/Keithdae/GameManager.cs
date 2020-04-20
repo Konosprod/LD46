@@ -133,6 +133,9 @@ public class GameManager : MonoBehaviour
             UiManager._instance.UpdateSpeedText("Speed : " + GetAverageSpeed().ToString("F2"));
             UiManager._instance.UpdateTimerText("Time : " + (timer > 0f ? timer.ToString("F2") : "0"));
             UiManager._instance.UpdateLevelText("Level " + level.ToString());
+
+
+            BrickManager._instance.SetupLevel();
         }
     }
 
@@ -162,12 +165,20 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game is over noob");
+        foreach (BallController ball in balls)
+        {
+            ball.gameObject.SetActive(false);
+        }
 
     }
 
     private void WinGame()
     {
         Debug.Log("You won the game, gg");
+        foreach (BallController ball in balls)
+        {
+            ball.gameObject.SetActive(false);
+        }
 
     }
 }
