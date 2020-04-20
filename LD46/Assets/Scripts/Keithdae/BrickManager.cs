@@ -28,6 +28,7 @@ public class BrickManager : MonoBehaviour
     private GameObject previewBrickIceV;
     private GameObject previewBrickWideH;
     private GameObject previewBrickWideV;
+    public GameObject previewRedCross;
     private float alphaFactorPreview = 0.25f;
     private bool isHorizontal = true;
 
@@ -126,10 +127,22 @@ public class BrickManager : MonoBehaviour
         brickPosition.z = 0;
         previewBrick.transform.position = brickPosition;
 
+        bool costCheck = CheckCost();
+        bool spaceCheck = CheckSpace();
+        if (!costCheck || !spaceCheck)
+        {
+            previewRedCross.SetActive(true);
+            previewRedCross.transform.position = brickPosition;
+        }
+        else
+        {
+            previewRedCross.SetActive(false);
+        }
+
 
         /// Inputs
         // Left-click => horizontal brick
-        if (Input.GetMouseButtonDown(0) && CheckSpace() && CheckCost())
+        if (Input.GetMouseButtonDown(0) && costCheck && spaceCheck)
         {
             if (isHorizontal)
                 Instantiate(selectedBrickTypeHorizontalPrefab, brickPosition, selectedBrickTypeHorizontalPrefab.transform.rotation, brickHolder);

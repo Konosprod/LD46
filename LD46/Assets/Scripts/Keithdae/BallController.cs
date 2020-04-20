@@ -49,10 +49,10 @@ public class BallController : MonoBehaviour
 
     void FixedUpdate()
     {
+        ComputeLinePreview();
+
         if (isActive)
         {
-            ComputeLinePreview();
-
             Vector2 pos = new Vector2(transform.position.x, transform.position.y);
             Vector2 dir = new Vector2(speed.x, speed.y).normalized;
             float remainingMagnitude = speed.magnitude * Time.fixedDeltaTime;
