@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
+    public AudioClip breakingSound;
+
     public enum BrickType
     {
         Normal = 0,
@@ -22,6 +24,7 @@ public class Brick : MonoBehaviour
 
     public void DestroyBrick()
     {
+        AudioManager.instance.PlaySfx(breakingSound);
         particles.time = 0;
         particles.Play();
         this.GetComponent<SpriteRenderer>().enabled = false;

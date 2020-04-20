@@ -4934,6 +4934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29248bf1261342a459458bfc06901520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  breakingSound: {fileID: 8300000, guid: 2190167dcd978ab4eb0dae72460c5e93, type: 3}
   type: 1
   iceBrickSlowFactor: 0.5
   creator: {fileID: 0}
