@@ -21,6 +21,16 @@ public class BrickManager : MonoBehaviour
     public Transform brickHolder;
 
 
+    private GameObject previewBrick;
+    private GameObject previewBrickNormalH;
+    private GameObject previewBrickNormalV;
+    private GameObject previewBrickIceH;
+    private GameObject previewBrickIceV;
+    private GameObject previewBrickWideH;
+    private GameObject previewBrickWideV;
+    private float alphaFactorPreview = 0.25f;
+    private bool isHorizontal = true;
+
     [HideInInspector]
     public long initialBrickPoints = 10;
     private long brickPoints = 10;
@@ -63,33 +73,77 @@ public class BrickManager : MonoBehaviour
         ballMask = LayerMask.GetMask("Ball");
         selectedBrickTypeHorizontalPrefab = brickNormalHorizontalPrefab;
         selectedBrickTypeVerticalPrefab = brickNormalVerticalPrefab;
+
+
+        previewBrickNormalH = Instantiate(brickNormalHorizontalPrefab, Vector3.zero, brickNormalHorizontalPrefab.transform.rotation, transform);
+        previewBrickNormalH.GetComponent<Collider2D>().enabled = false;
+        SpriteRenderer srpbnh = previewBrickNormalH.GetComponent<SpriteRenderer>();
+        srpbnh.color = new Color(srpbnh.color.r, srpbnh.color.g, srpbnh.color.b, alphaFactorPreview);
+        previewBrickNormalH.SetActive(false);
+
+        previewBrickNormalV = Instantiate(brickNormalVerticalPrefab, Vector3.zero, brickNormalVerticalPrefab.transform.rotation, transform);
+        previewBrickNormalV.GetComponent<Collider2D>().enabled = false;
+        SpriteRenderer srpbnv = previewBrickNormalV.GetComponent<SpriteRenderer>();
+        srpbnv.color = new Color(srpbnv.color.r, srpbnv.color.g, srpbnv.color.b, alphaFactorPreview);
+        previewBrickNormalV.SetActive(false);
+
+        previewBrickIceH = Instantiate(brickIceHorizontalPrefab, Vector3.zero, brickIceHorizontalPrefab.transform.rotation, transform);
+        previewBrickIceH.GetComponent<Collider2D>().enabled = false;
+        SpriteRenderer srpbih = previewBrickIceH.GetComponent<SpriteRenderer>();
+        srpbih.color = new Color(srpbih.color.r, srpbih.color.g, srpbih.color.b, alphaFactorPreview);
+        previewBrickIceH.SetActive(false);
+
+        previewBrickIceV = Instantiate(brickIceVerticalPrefab, Vector3.zero, brickIceVerticalPrefab.transform.rotation, transform);
+        previewBrickIceV.GetComponent<Collider2D>().enabled = false;
+        SpriteRenderer srpbiv = previewBrickIceV.GetComponent<SpriteRenderer>();
+        srpbiv.color = new Color(srpbiv.color.r, srpbiv.color.g, srpbiv.color.b, alphaFactorPreview);
+        previewBrickIceV.SetActive(false);
+
+        previewBrickWideH = Instantiate(brickWideHorizontalPrefab, Vector3.zero, brickWideHorizontalPrefab.transform.rotation, transform);
+        previewBrickWideH.GetComponent<Collider2D>().enabled = false;
+        SpriteRenderer srpbwh = previewBrickWideH.GetComponent<SpriteRenderer>();
+        srpbwh.color = new Color(srpbwh.color.r, srpbwh.color.g, srpbwh.color.b, alphaFactorPreview);
+        previewBrickWideH.SetActive(false);
+
+        previewBrickWideV = Instantiate(brickWideVerticalPrefab, Vector3.zero, brickWideVerticalPrefab.transform.rotation, transform);
+        previewBrickWideV.GetComponent<Collider2D>().enabled = false;
+        SpriteRenderer srpbwv = previewBrickWideV.GetComponent<SpriteRenderer>();
+        srpbwv.color = new Color(srpbwv.color.r, srpbwv.color.g, srpbwv.color.b, alphaFactorPreview);
+        previewBrickWideV.SetActive(false);
+
+
+        previewBrick = previewBrickNormalH;
+
+        ChangePreviewBrick();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /// Brick preview
+        Vector3 brickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        brickPosition.y = brickPosition.y > 10f ? 10f : brickPosition.y;
+        brickPosition.z = 0;
+        previewBrick.transform.position = brickPosition;
+
 
         /// Inputs
         // Left-click => horizontal brick
         if (Input.GetMouseButtonDown(0) && CheckSpace() && CheckCost())
         {
-            Vector3 brickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            brickPosition.y = brickPosition.y > 10f ? 10f : brickPosition.y;
-            brickPosition.z = 0;
-            Instantiate(selectedBrickTypeHorizontalPrefab, brickPosition, brickNormalHorizontalPrefab.transform.rotation, brickHolder);
+            if (isHorizontal)
+                Instantiate(selectedBrickTypeHorizontalPrefab, brickPosition, selectedBrickTypeHorizontalPrefab.transform.rotation, brickHolder);
+            else
+                Instantiate(selectedBrickTypeVerticalPrefab, brickPosition, selectedBrickTypeVerticalPrefab.transform.rotation, brickHolder);
 
             BuyBrick();
         }
 
-        // Right-click => vertical brick
-        if (Input.GetMouseButtonDown(1) && CheckSpace() && CheckCost())
+        // Right-click => swap between horizontal and vertical
+        if (Input.GetMouseButtonDown(1))
         {
-            Vector3 brickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            brickPosition.y = brickPosition.y > 10f ? 10f : brickPosition.y;
-            brickPosition.z = 0;
-            Instantiate(selectedBrickTypeVerticalPrefab, brickPosition, brickNormalVerticalPrefab.transform.rotation, brickHolder);
-
-            BuyBrick();
+            isHorizontal = !isHorizontal;
+            ChangePreviewBrick();
         }
 
 
@@ -100,6 +154,7 @@ public class BrickManager : MonoBehaviour
             selectedBrickTypeHorizontalPrefab = brickNormalHorizontalPrefab;
             selectedBrickTypeVerticalPrefab = brickNormalVerticalPrefab;
             UiManager._instance.SelectNormalBrick();
+            ChangePreviewBrick();
         }
 
         // 2 is ice brick type
@@ -109,6 +164,7 @@ public class BrickManager : MonoBehaviour
             selectedBrickTypeHorizontalPrefab = brickIceHorizontalPrefab;
             selectedBrickTypeVerticalPrefab = brickIceVerticalPrefab;
             UiManager._instance.SelectIceBrick();
+            ChangePreviewBrick();
         }
 
         // 3 is wide brick type
@@ -118,6 +174,7 @@ public class BrickManager : MonoBehaviour
             selectedBrickTypeHorizontalPrefab = brickWideHorizontalPrefab;
             selectedBrickTypeVerticalPrefab = brickWideVerticalPrefab;
             UiManager._instance.SelectWideBrick();
+            ChangePreviewBrick();
         }
 
 
@@ -135,6 +192,51 @@ public class BrickManager : MonoBehaviour
                 bpGenTimer = 1f;
             }
         }
+    }
+
+    private void ChangePreviewBrick()
+    {
+        Vector3 pos = previewBrick.transform.position;
+        previewBrick.SetActive(false);
+        if (isHorizontal)
+        {
+            switch (selectedBrickType)
+            {
+                case Brick.BrickType.Normal:
+                    previewBrick = previewBrickNormalH;
+                    break;
+                case Brick.BrickType.Ice:
+                    previewBrick = previewBrickIceH;
+                    break;
+                case Brick.BrickType.Wide:
+                    previewBrick = previewBrickWideH;
+                    break;
+                default:
+                    Debug.LogError("UNKNOWN BRICK TYPE ANGRY FACE");
+                    break;
+            }
+        }
+        else
+        {
+            switch (selectedBrickType)
+            {
+                case Brick.BrickType.Normal:
+                    previewBrick = previewBrickNormalV;
+                    break;
+                case Brick.BrickType.Ice:
+                    previewBrick = previewBrickIceV;
+                    break;
+                case Brick.BrickType.Wide:
+                    previewBrick = previewBrickWideV;
+                    break;
+                default:
+                    Debug.LogError("UNKNOWN BRICK TYPE ANGRY FACE");
+                    break;
+            }
+        }
+
+        previewBrick.transform.position = pos;
+        previewBrick.SetActive(true);
     }
 
 
