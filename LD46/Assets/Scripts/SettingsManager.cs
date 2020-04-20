@@ -10,11 +10,11 @@ public class SettingsManager : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = FindObjectOfType<SettingsManager>();
 
-                if(_instance == null)
+                if (_instance == null)
                 {
                     _instance = new GameObject("Spawned SettingsManager", typeof(SettingsManager)).GetComponent<SettingsManager>();
                 }
@@ -81,6 +81,7 @@ public class SettingsManager : MonoBehaviour
             OnMusicVolumeChanged(sliderVolumeMusic.value);
             sliderVolumeSFX.value = settings.sfxVolume;
             OnSfxVolumeChanged(settings.sfxVolume);
+       
         }
         catch(System.Exception e)
         {
@@ -91,6 +92,9 @@ public class SettingsManager : MonoBehaviour
             sliderVolumeMusic.value = 1f;
             sliderVolumeSFX.value = 1f;
             settings.firstRun = true;
+            settings.panel1Seen = false;
+            settings.panel2Seen = false;
+            settings.panel3Seen = false;
         }
     }
 

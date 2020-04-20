@@ -6,4 +6,7 @@ public class GameSettings {
     public bool fullScreen;
     public int resolution;
     public bool firstRun;
+    public bool panel1Seen;
+    public bool panel2Seen;
+    public bool panel3Seen;
 }

@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     private float timer = 1337f;
 
+    [Header("Panel Tuto")]
+    public GameObject panelLevel1;
+    public GameObject panelLevel3;
+    public GameObject panelLevel6;
+
     [Header("Upgrades")]
     public int initialBPLevel = 1;  // Upgrades the amount of BP you get at round start
     public int bpGenLevel = 1;      // Upgrades the BP generation amount
@@ -173,6 +178,25 @@ public class GameManager : MonoBehaviour
 
         isGameActive = false;
         level++;
+
+        if (level == 1 && !SettingsManager.instance.settings.panel1Seen)
+        {
+            panelLevel1.SetActive(true);
+            SettingsManager.instance.settings.panel1Seen = true;
+        }
+
+        if (level == 3 && !SettingsManager.instance.settings.panel2Seen)
+        {
+            panelLevel3.SetActive(true);
+            SettingsManager.instance.settings.panel2Seen = true;
+        }
+
+        if (level == 6 && !SettingsManager.instance.settings.panel1Seen)
+        {
+            panelLevel6.SetActive(true);
+            SettingsManager.instance.settings.panel3Seen = true;
+        }
+
         SetupLevel();
     }
 
@@ -180,7 +204,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         BrickManager._instance.brickPoints = 0;
-        UiManager._instance.ShowEndGame(false);
+        UiManager._instance.ShowEndGame(false, level);
 
         foreach (BallController ball in balls)
         {
@@ -193,7 +217,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         BrickManager._instance.brickPoints = 0;
-        UiManager._instance.ShowEndGame(true);
+        UiManager._instance.ShowEndGame(true, level);
 
         foreach (BallController ball in balls)
         {
@@ -206,6 +230,7 @@ public class GameManager : MonoBehaviour
         level = 1;
         initialBPLevel = 1;
         bpGenLevel = 1;
+        BrickManager._instance.ClearBricks();
         SetupLevel();
     }
 

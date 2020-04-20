@@ -319,4 +319,12 @@ public class BrickManager : MonoBehaviour
                 break;
         }
     }
+
+    public void ClearBricks()
+    {
+        foreach (Transform child in brickHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }
