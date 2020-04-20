@@ -133,6 +133,9 @@ public class GameManager : MonoBehaviour
             UiManager._instance.UpdateSpeedText("Speed : " + GetAverageSpeed().ToString("F2"));
             UiManager._instance.UpdateTimerText("Time : " + (timer > 0f ? timer.ToString("F2") : "0"));
             UiManager._instance.UpdateLevelText("Level " + level.ToString());
+
+
+            BrickManager._instance.SetupLevel();
         }
     }
 
@@ -164,12 +167,22 @@ public class GameManager : MonoBehaviour
         EndLevel();
         UiManager._instance.ShowEndGame(false);
 
+        foreach (BallController ball in balls)
+        {
+            ball.gameObject.SetActive(false);
+        }
+
     }
 
     private void WinGame()
     {
         EndLevel();
         UiManager._instance.ShowEndGame(true);
+
+        foreach (BallController ball in balls)
+        {
+            ball.gameObject.SetActive(false);
+        }
     }
 
     public void ResetGame()
@@ -177,6 +190,7 @@ public class GameManager : MonoBehaviour
         level = 1;
         SetupLevel();
     }
+
 
     public void QuitGame()
     {

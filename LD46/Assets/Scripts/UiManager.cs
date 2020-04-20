@@ -27,6 +27,7 @@ public class UiManager : MonoBehaviour
     public Text speedText;
     public Text timerText;
     public Text endofgameText;
+    public Text bpText;
 
     void Awake()
     {
@@ -66,6 +67,11 @@ public class UiManager : MonoBehaviour
     public void UpdateTimerText(string text)
     {
         timerText.text = text;
+    }
+
+    public void UpdateBpText(string text)
+    {
+        bpText.text = text;
     }
 
     public void SelectIceBrick()

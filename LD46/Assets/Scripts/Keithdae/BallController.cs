@@ -105,7 +105,7 @@ public class BallController : MonoBehaviour
                         brick.creator.RemoveBrick(brick);
                     }
 
-                    switch(brick.type)
+                    switch (brick.type)
                     {
                         case Brick.BrickType.Ice:
                             hasHitIceBrick = true;
@@ -130,7 +130,7 @@ public class BallController : MonoBehaviour
                 speed *= iceBrickSlowFactor;
 
 
-            if(hasBrokenBrick)
+            if (hasBrokenBrick)
                 speed *= AccelerationFactor;
 
 
