@@ -19,7 +19,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private LevelInfo[] levels = new LevelInfo[5] { new LevelInfo(1, 3.5f, 20f), new LevelInfo(1, 5f, 30f), new LevelInfo(2, 3f, 25f), new LevelInfo(1, 10f, 15f), new LevelInfo(2, 4f, 45f) };
+    private LevelInfo[] levels = new LevelInfo[10] { new LevelInfo(1, 3.5f, 20f), new LevelInfo(1, 5f, 30f), new LevelInfo(2, 3f, 25f), new LevelInfo(1, 10f, 15f), new LevelInfo(2, 4f, 45f),
+                                                     new LevelInfo(1, 12f, 30f), new LevelInfo(3, 3f, 30f), new LevelInfo(2, 7f, 15f), new LevelInfo(3, 4.5f, 20f), new LevelInfo(4, 3f, 45f)
+
+    };
 
 
     public static GameManager _instance;
