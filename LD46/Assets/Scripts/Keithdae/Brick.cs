@@ -32,6 +32,13 @@ public class Brick : MonoBehaviour
         particles.time = 0;
         particles.Play();
         this.GetComponent<SpriteRenderer>().enabled = false;
+
+        if (hit1 != null)
+            hit1.SetActive(false);
+
+        if(hit2 != null)
+            hit2.SetActive(false);
+
         this.GetComponent<Collider2D>().enabled = false;
         Object.Destroy(this.gameObject, .5f);
     }
